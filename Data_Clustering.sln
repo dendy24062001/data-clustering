@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30011.22
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data_Clustering", "Data_Clustering\Data_Clustering.csproj", "{A6C31167-C47F-4204-A40E-A9669284CD7F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data_Clustering_LIB", "Data_Clustering_LIB\Data_Clustering_LIB.csproj", "{7CACB159-F51F-4268-8F42-C8114886D8A5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A6C31167-C47F-4204-A40E-A9669284CD7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6C31167-C47F-4204-A40E-A9669284CD7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6C31167-C47F-4204-A40E-A9669284CD7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6C31167-C47F-4204-A40E-A9669284CD7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CACB159-F51F-4268-8F42-C8114886D8A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CACB159-F51F-4268-8F42-C8114886D8A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CACB159-F51F-4268-8F42-C8114886D8A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CACB159-F51F-4268-8F42-C8114886D8A5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BCAAA62A-B9F5-4E3B-A056-1CB6A2E57958}
+	EndGlobalSection
+EndGlobal
