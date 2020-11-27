@@ -10,25 +10,44 @@ namespace Data_Clustering_LIB
 {
     public class IrisParser
     {
-
-        public static List<int> GetSepalLength(string filePath)
+        public static List<double> GetSepalL(List<Iris> listOfIris)
         {
-            List<int> listInt = new List<int>();
-            using (TextFieldParser text = new TextFieldParser(filePath))
+            List<double> listOfSepalL = new List<double>();
+            foreach(Iris iris in listOfIris)
             {
-                text.CommentTokens = new string[] { "#" };
-                text.SetDelimiters(new string[] { "," });
-                text.HasFieldsEnclosedInQuotes = true;
-
-                text.ReadLine();
-
-                while (!text.EndOfData)
-                {
-                    string[] fields = text.ReadFields();
-                    listInt.Add(int.Parse(fields[1]));
-                }
-                return listInt;
+                listOfSepalL.Add(iris.SepalL);
             }
+            return listOfSepalL;
+        }
+
+        public static List<double> GetSepalW(List<Iris> listOfIris)
+        {
+            List<double> listOfSepalW = new List<double>();
+            foreach (Iris iris in listOfIris)
+            {
+                listOfSepalW.Add(iris.SepalW);
+            }
+            return listOfSepalW;
+        }
+
+        public static List<double> GetPetalL(List<Iris> listOfIris)
+        {
+            List<double> listOfPetalL = new List<double>();
+            foreach (Iris iris in listOfIris)
+            {
+                listOfPetalL.Add(iris.SepalL);
+            }
+            return listOfPetalL;
+        }
+
+        public static List<double> GetPetalW(List<Iris> listOfIris)
+        {
+            List<double> listOfPetalW = new List<double>();
+            foreach (Iris iris in listOfIris)
+            {
+                listOfPetalW.Add(iris.SepalW);
+            }
+            return listOfPetalW;
         }
 
         public static List<int> GetSepalWidth(string filePath)
