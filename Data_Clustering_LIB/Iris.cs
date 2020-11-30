@@ -13,19 +13,19 @@ namespace Data_Clustering_LIB
         private double sepalW;
         private double petalL;
         private double petalW;
+        private Centroid centroid;
 
         #region Constructor
         public Iris()
         {
-            Id = 0;
+
             SepalL = 0.0;
             SepalW = 0.0;
             PetalL = 0.0;
             PetalW = 0.0;
         }
-        public Iris(int idInput, double sepalLInput, double sepalWInput, double petalLInput, double petalWInput)
+        public Iris(double sepalLInput, double sepalWInput, double petalLInput, double petalWInput)
         {
-            Id = idInput;
             SepalL = sepalLInput;
             SepalW = sepalWInput;
             PetalL = petalLInput;
@@ -39,6 +39,7 @@ namespace Data_Clustering_LIB
         public double SepalW { get => sepalW; set => sepalW = value; }
         public double PetalL { get => petalL; set => petalL = value; }
         public double PetalW { get => petalW; set => petalW = value; }
+        public Centroid Centroid { get => centroid; set => centroid = value; }
         #endregion
     }
 }

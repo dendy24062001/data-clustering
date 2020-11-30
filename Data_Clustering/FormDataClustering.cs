@@ -51,7 +51,7 @@ namespace Data_Clustering
                         while (!csvParser.EndOfData)
                         {
                             string[] fields = csvParser.ReadFields();
-                            Iris iris = new Iris(int.Parse(fields[0]), double.Parse(fields[1]), double.Parse(fields[2]), double.Parse(fields[3]), double.Parse(fields[4]));
+                            Iris iris = new Iris(double.Parse(fields[1]), double.Parse(fields[2]), double.Parse(fields[3]), double.Parse(fields[4]));
                             listOfIris.Add(iris);
                         }
                     }
