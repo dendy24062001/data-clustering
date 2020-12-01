@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Centroid.cs" />
+    <Compile Include="CentroidMover.cs" />
     <Compile Include="Iris.cs" />
     <Compile Include="IrisParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
