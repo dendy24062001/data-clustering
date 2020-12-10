@@ -22,6 +22,7 @@ namespace Data_Clustering
         List<double> listOfPetalW;
         OpenFileDialog open;
 
+
         public FormDataClustering()
         {
             InitializeComponent();
@@ -69,26 +70,27 @@ namespace Data_Clustering
 
         private void buttonShow_Click(object sender, EventArgs e)
         {
+            
             //button untuk menampilkan dataset Iris kedalam DataGridView
-            try
-            {
-                dataGridViewDataCluster.DataSource = null;
-                if (open.FileName != "")
-                {
-                    if (listOfIris.Count > 0)
-                    {
-                        dataGridViewDataCluster.DataSource = listOfIris;
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("File Kosong", "Error");
-                }
-            }
-            catch (Exception error)
-            {
-                MessageBox.Show("Tidak Bisa Menampilkan File. Pesan Error: " + error, "Error");
-            }
+            //try
+            //{
+            //    dataGridViewDataCluster.DataSource = null;
+            //    if (open.FileName != "")
+            //    {
+            //        if (listOfIris.Count > 0)
+            //        {
+            //            dataGridViewDataCluster.DataSource = listOfIris;
+            //        }
+            //    }
+            //    else
+            //    {
+            //        MessageBox.Show("File Kosong", "Error");
+            //    }
+            //}
+            //catch (Exception error)
+            //{
+            //    MessageBox.Show("Tidak Bisa Menampilkan File. Pesan Error: " + error, "Error");
+            //}
         }
 
         private void lengthToolStripMenuItem_Click(object sender, EventArgs e)
@@ -137,6 +139,34 @@ namespace Data_Clustering
             {
                 listBoxDisplay.Items.Add($"{listOfPetalW[i]}");
             }
+        }
+
+        private void FormDataClustering_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Centroid centroid = new Centroid();
+
+            Random data1 = new Random();
+            Random data2 = new Random();
+            Random data3 = new Random();
+            Random data4 = new Random();
+            int decimal_place = 2;
+            centroid.F1 = Math.Round(data1.NextDouble(), decimal_place);
+            centroid.F2 = Math.Round(data2.NextDouble(), decimal_place);
+            centroid.F3 = Math.Round(data3.NextDouble(), decimal_place);
+            centroid.F4 = Math.Round(data4.NextDouble(), decimal_place);
+
+
+            listBoxDisplay.Items.Add("F1 = " + centroid.F1.ToString());
+            listBoxDisplay.Items.Add("F2 = " + centroid.F2.ToString());
+            listBoxDisplay.Items.Add("F3 = " + centroid.F3.ToString());
+
+            listBoxDisplay.Items.Add("F4 = " + centroid.F4.ToString());
+
         }
     }
 }
