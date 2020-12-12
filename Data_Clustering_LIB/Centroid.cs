@@ -70,7 +70,27 @@ namespace Data_Clustering_LIB
         public double F2 { get => f2; set => f2 = value; }
         public double F3 { get => f3; set => f3 = value; }
         public double F4 { get => f4; set => f4 = value; }
-       
+        
+
+        public void CentroidPosition(List<Iris> irises)
+        {
+            int divider = irises.Count;
+
+            double f1 = 0, f2 = 0, f3 = 0, f4 = 0;
+
+            foreach(Iris iris in irises)
+            {
+                f1 += iris.SepalL;
+                f2 += iris.SepalW;
+                f3 += iris.PetalL;
+                f4 += iris.PetalW;
+            }
+
+            F1 = f1 / divider;
+            F2 = f2 / divider;
+            F3 = f3 / divider;
+            F4 = f4 / divider;
+        }
 
         public void  HitungPosisiCentroid(Iris iris)
         {

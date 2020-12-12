@@ -252,25 +252,19 @@ namespace Data_Clustering
 
         private void Try()
         {
+            List<Iris> listSetosa = new List<Iris>();
+            List<Iris> listVersicolor = new List<Iris>();
+            List<Iris> listVirginica = new List<Iris>();
+
             Random random = new Random();
 
-            Centroid IrisSetosa = new Centroid("IrisSetosa", random);
-            Centroid IrisVersicolor = new Centroid("IrisVersicolor", random);
-            Centroid IrisVirginica = new Centroid("IrisVirginica", random);
-
-            listBoxDisplay.Items.Add($"Setosa : F1 : {IrisSetosa.F1, 2}, F2 : {IrisSetosa.F2}, F3 : {IrisSetosa.F3}, F4 : {IrisSetosa.F4}");
-            listBoxDisplay.Items.Add($"Versicolor : F1 : {IrisVersicolor.F1}, F2 : {IrisVersicolor.F2}, F3 : {IrisVersicolor.F3}, F4 : {IrisVersicolor.F4}");
-            listBoxDisplay.Items.Add($"Virginica : F1 : {IrisVirginica.F1}, F2 : {IrisVirginica.F2}, F3 : {IrisVirginica.F3}, F4 : {IrisVirginica.F4}");
-
+            Centroid IrisSetosa = new Centroid("Setosa", random);
+            Centroid IrisVersicolor = new Centroid("Versicolor", random);
+            Centroid IrisVirginica = new Centroid("Virginica", random);
 
             foreach (Iris iris in listOfIris)
             {
                 iris.Centroid = CentroidMover.CountDistAndAssignCentroid(iris, IrisSetosa, IrisVersicolor, IrisVirginica);
-            }
-
-            foreach (Iris iris in listOfIris)
-            {
-
                 dataGridViewDataCluster.Rows.Add(
                     iris.SepalL,
                     iris.SepalW,
@@ -278,6 +272,31 @@ namespace Data_Clustering
                     iris.PetalW,
                     iris.Centroid.Name);
             }
+
+            foreach(Iris iris in listOfIris)
+            {
+                if(iris.Centroid.Name == IrisSetosa.Name)
+                {
+                    listSetosa.Add(iris);
+                }
+                else if(iris.Centroid.Name == IrisVersicolor.Name)
+                {
+                    listVersicolor.Add(iris);
+                }
+                else
+                {
+                    listVirginica.Add(iris);
+                }
+            }
+
+            
+
+            /*
+            listBoxDisplay.Items.Add($"Setosa : F1 : {IrisSetosa.F1, 2}, F2 : {IrisSetosa.F2}, F3 : {IrisSetosa.F3}, F4 : {IrisSetosa.F4}");
+            listBoxDisplay.Items.Add($"Versicolor : F1 : {IrisVersicolor.F1}, F2 : {IrisVersicolor.F2}, F3 : {IrisVersicolor.F3}, F4 : {IrisVersicolor.F4}");
+            listBoxDisplay.Items.Add($"Virginica : F1 : {IrisVirginica.F1}, F2 : {IrisVirginica.F2}, F3 : {IrisVirginica.F3}, F4 : {IrisVirginica.F4}");
+            */
+
 
         }
     }
