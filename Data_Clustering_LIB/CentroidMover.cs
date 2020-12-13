@@ -35,7 +35,7 @@ namespace Data_Clustering_LIB
 
         private static double CountDist(Iris iris, Centroid centroid)
         {
-            double distance = Math.Sqrt(Math.Pow((iris.SepalL - centroid.F1), 2) + Math.Pow((iris.SepalW - centroid.F2), 2) + Math.Pow((iris.PetalL - centroid.F3), 2) + Math.Pow((iris.PetalW - centroid.F4), 2));
+            double distance = Math.Sqrt(Math.Pow((iris.SepalL - (double)centroid.F1), 2) + Math.Pow((iris.SepalW - (double)centroid.F2), 2) + Math.Pow((iris.PetalL - (double)centroid.F3), 2) + Math.Pow((iris.PetalW - (double)centroid.F4), 2));
             return distance;
         }
     }
