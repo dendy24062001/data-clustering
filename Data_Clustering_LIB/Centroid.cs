@@ -97,14 +97,20 @@ namespace Data_Clustering_LIB
             double result = (iris.PetalL + iris.PetalW + iris.SepalL + iris.SepalW) / 4;
            
         }
-        public static double CalculateDistance (Iris f, Iris s)
+        public static double CalculateDistanceIris (Iris f, Iris s)
         {
             //ini sama kek count distance di centroid mover
             double result = Math.Pow(f.PetalL - s.PetalL, 2) +
                 Math.Pow(f.PetalW - s.PetalW, 2) + Math.Pow(f.SepalL - s.SepalL, 2) + Math.Pow(f.SepalW - s.SepalW, 2);
             return result;
         }
+        public static double CalculateDistanceCentroid(Centroid c1, Centroid c2)
+        {
+            //ini sama kek count distance di centroid mover
+            double result = Math.Pow(c1.F1 - c2.F1, 2) +
+                Math.Pow(c1.F2 - c2.F2, 2) + Math.Pow(c1.F3 - c2.F3, 2) + Math.Pow(c1.F4 - c2.F4, 2);
+            return result;
+        }
 
-        
     }
 }
