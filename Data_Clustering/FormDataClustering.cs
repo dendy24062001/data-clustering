@@ -204,7 +204,7 @@ namespace Data_Clustering
             {
                 if (i != f)
                 {
-                    double result = Centroid.CalculateDistance(listOfIris[f], listOfIris[i]);
+                    double result = Centroid.CalculateDistanceIris (listOfIris[f], listOfIris[i]);
                     if (outResult < result)
                     {
                         outResult = result;
@@ -248,6 +248,7 @@ namespace Data_Clustering
             {
                 Try();
             }
+
         }
 
         private void Try()
