@@ -92,17 +92,50 @@ namespace Data_Clustering_LIB
             F4 = f4 / divider;
         }
 
-        public void  HitungPosisiCentroid(Iris iris)
+        public Iris  HitungPosisiCentroid(List<Iris> irisListInput)
         {
-            double result = (iris.PetalL + iris.PetalW + iris.SepalL + iris.SepalW) / 4;
-           
+            //double result = (iris.PetalL + iris.PetalW + iris.SepalL + iris.SepalW) / 4;
+
+            //method untuk mencari feat cluster
+            Iris clusterResult;
+            double sLength, sWidth, pLength, pWidth;
+            sLength = 0;
+            sWidth = 0;
+            pLength = 0;
+            pWidth = 0;
+            int i = 0;
+            foreach (Iris iris in irisListInput)
+            {
+                sLength += irisListInput[i].SepalL;
+                sWidth += irisListInput[i].SepalW;
+                pLength += irisListInput[i].PetalL;
+                pWidth += irisListInput[i].PetalW;
+                i++;
+            }
+
+            sLength /= i;
+            sWidth /= i;
+            pLength /= i;
+            pWidth /= i;
+
+            return clusterResult = new Iris(sLength, sWidth, pLength, pWidth);
         }
-        public static double CalculateDistanceIris (Iris f, Iris s)
+        public static double CalculateDistanceIris(Iris obj, Iris cluster)
         {
+            double sLength, sWidth, pLength, pWidth;
+            sLength = Math.Pow((obj.SepalL - cluster.SepalL), 2.0);
+            sWidth = Math.Pow((obj.SepalW - cluster.SepalW), 2.0);
+            pLength = Math.Pow((obj.PetalL - cluster.PetalL), 2.0);
+            pWidth = Math.Pow((obj.PetalW - cluster.PetalW), 2.0);
+
+            double distanceResult = Math.Sqrt(sLength + sWidth + pLength + pWidth);
+
+            return distanceResult;
+            
             //ini sama kek count distance di centroid mover
-            double result = Math.Pow(f.PetalL - s.PetalL, 2) +
+            /*double result = Math.Pow(f.PetalL - s.PetalL, 2) +
                 Math.Pow(f.PetalW - s.PetalW, 2) + Math.Pow(f.SepalL - s.SepalL, 2) + Math.Pow(f.SepalW - s.SepalW, 2);
-            return result;
+            return result;*/
         }
         public static double CalculateDistanceCentroid(Centroid c1, Centroid c2)
         {

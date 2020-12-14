@@ -65,6 +65,7 @@ namespace Data_Clustering
             {
                 csvParser.CommentTokens = new string[] { "#" };
                 csvParser.SetDelimiters(new string[] { "," });
+                
 
                 csvParser.ReadLine();
                 while (!csvParser.EndOfData)
@@ -77,11 +78,11 @@ namespace Data_Clustering
                         Convert.ToDouble(fields[3]),
                         Convert.ToDouble(fields[4]));
                         */
-                    /*Iris iris = new Iris(
-                        Double.Parse(fields[1]),
-                        Double.Parse(fields[2]),
-                        Double.Parse(fields[3]),
-                        Double.Parse(fields[4])); */
+                    Iris iris = new Iris(
+                        double.Parse(fields[1]),
+                        double.Parse(fields[2]),
+                        double.Parse(fields[3]),
+                        double.Parse(fields[4]));
 
                     /*Iris iris = new Iris(
                         double.Parse(fields[1]), 
@@ -95,14 +96,14 @@ namespace Data_Clustering
                         fields[3],
                         fields[4]);*/
 
-                    Iris iris = new Iris(
+                    /*Iris iris = new Iris(
                         double.Parse(fields[1].Replace('.', ',')),
                         double.Parse(fields[2].Replace('.', ',')),
                         double.Parse(fields[3].Replace('.', ',')),
-                        double.Parse(fields[4].Replace('.', ',')));
+                        double.Parse(fields[4].Replace('.', ',')));*/
 
-
-                    listOfIris.Add(iris);
+                   
+                    //listOfIris.Add(iris);
 
                     //listString.Add(fields[1]);
                 }
@@ -242,16 +243,16 @@ namespace Data_Clustering
 
         private void buttonCoba_Click_1(object sender, EventArgs e)
         {
-            string path = @"G:\Kuliah\Project Kampus\Semester 3\data-clustering\Iris Dataset\Iris.csv";
+            string path = @"D:\Tugas Proyek DatMin\proyek utama\data-clustering\Iris Dataset\Iris.csv";
             CsvParse(path);
            if(listOfIris.Count > 0)
             {
-                Try();
+                //Try();
             }
 
         }
 
-        private void Try()
+        /*private void Try()
         {
             List<Iris> listSetosa = new List<Iris>();
             List<Iris> listVersicolor = new List<Iris>();
@@ -288,7 +289,7 @@ namespace Data_Clustering
                 {
                     listVirginica.Add(iris);
                 }
-            }
+            }*/
 
             
 
@@ -296,9 +297,46 @@ namespace Data_Clustering
             listBoxDisplay.Items.Add($"Setosa : F1 : {IrisSetosa.F1, 2}, F2 : {IrisSetosa.F2}, F3 : {IrisSetosa.F3}, F4 : {IrisSetosa.F4}");
             listBoxDisplay.Items.Add($"Versicolor : F1 : {IrisVersicolor.F1}, F2 : {IrisVersicolor.F2}, F3 : {IrisVersicolor.F3}, F4 : {IrisVersicolor.F4}");
             listBoxDisplay.Items.Add($"Virginica : F1 : {IrisVirginica.F1}, F2 : {IrisVirginica.F2}, F3 : {IrisVirginica.F3}, F4 : {IrisVirginica.F4}");
-            */
+            
 
 
+        }*/
+
+        private void buttonDetermine_Click(object sender, EventArgs e)
+        {
+            Random random = new Random();
+            Iris cluster;
+
+            List<Iris> listOfCluster = new List<Iris>();
+
+            double max;
+            int detRandom, clusterNumb;
+            detRandom = random.Next(0, listOfIris.Count - 1);
+            clusterNumb = (int)numericUpDownClusterNumber.Value;
+
+            cluster = listOfIris[detRandom];
+            listOfCluster.Add(cluster);
+            foreach(Iris iris in listOfIris)
+            {
+                iris.calcDistance(cluster);               
+            }
+
+            for(int i = 1; i < clusterNumb; i++)
+            {
+                max = listOfIris[0].DistanceSquare;
+                for (int j = 1; j < listOfIris.Count; j++)
+                {
+                    if (max < listOfIris[i].DistanceSquare)
+                    {
+                        cluster = listOfIris[i];
+                    }
+                }
+                listOfCluster.Add(cluster);
+                foreach (Iris iris in listOfIris)
+                {
+                    iris.calcDistance(cluster);
+                }
+            }
         }
     }
 }
