@@ -395,46 +395,55 @@ namespace Data_Clustering
             List<Iris> irisC1 = new List<Iris>();
             List<Iris> irisC2 = new List<Iris>();
             List<Iris> irisC3 = new List<Iris>();
-            double sseOld = CentroidMover.CalcSSE(listOfIris, centroid1, centroid2, centroid3);
+            
             while (stop == false)
             {
-                 sseOld = CentroidMover.CalcSSE(listOfIris, centroid1, centroid2, centroid3);
-                 irisC1 = new List<Iris>();
-                 irisC2 = new List<Iris>();
-                 irisC3 = new List<Iris>();
+                irisC1 = new List<Iris>();
+                irisC2 = new List<Iris>();
+                irisC3 = new List<Iris>();
+                double sseOld = 0;
                 foreach (Iris i in listOfIris)
                 {
+                    if(iteration != 0)
+                         sseOld = CentroidMover.CalcSSE(listOfIris, centroid1, centroid2, centroid3);
                     i.Centroid = CentroidMover.CountDistAndAssignCentroid(i, centroid1, centroid2, centroid3);
                     if (i.Centroid == centroid1)
+                    {
                         irisC1.Add(i);
+                    }
                     else if (i.Centroid == centroid2)
+                    {
                         irisC2.Add(i);
+                    }
                     else if (i.Centroid == centroid3)
+                    {
                         irisC3.Add(i);
+                    }
                 }
                 
-                c1New = Centroid.HitungPosisiCentroid(irisC1, "Setosa");
-                c2New = Centroid.HitungPosisiCentroid(irisC2, "Versicolor");
-                c3New = Centroid.HitungPosisiCentroid(irisC3, "Virginica");
-                double sseNew = CentroidMover.CalcSSE(listOfIris, c1New, c2New, c3New);
-                if (c1New == centroid1 && c2New == centroid2 && c3New == centroid3)
-                {
-                    stop = true;
-                    MessageBox.Show(iteration.ToString());
-                }
-                   
-                else if (sseOld == sseNew)
-                {
-                    stop = true;
-                    MessageBox.Show(iteration.ToString());
-                }
-                    
-                else
-                {
-                    centroid1 = c1New;
-                    centroid2 = c2New;
-                    centroid3 = c3New;
-                }
+                    c1New = Centroid.HitungPosisiCentroid(irisC1, "Setosa");
+                    c2New = Centroid.HitungPosisiCentroid(irisC2, "Versicolor");
+                    c3New = Centroid.HitungPosisiCentroid(irisC3, "Virginica");
+                    double sseNew = CentroidMover.CalcSSE(listOfIris, c1New, c2New, c3New);
+                    if (c1New == centroid1 && c2New == centroid2 && c3New == centroid3)
+                    {
+                        stop = true;
+                        MessageBox.Show(iteration.ToString());
+                    }
+
+                    else if (sseOld == sseNew)
+                    {
+                        stop = true;
+                        MessageBox.Show(iteration.ToString());
+                    }
+
+                    else
+                    {
+                        centroid1 = c1New;
+                        centroid2 = c2New;
+                        centroid3 = c3New;
+                    }
+                
                 iteration++;
                 switch (iteration)
                 {
