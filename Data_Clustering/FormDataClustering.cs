@@ -238,18 +238,6 @@ namespace Data_Clustering
                     case (15):
                         listBoxDisplay.Items.Add(CentroidMover.CalcSSE(listOfIris, centroid1, centroid2, centroid3));
                         continue;
-                    case (100):
-                        listBoxDisplay.Items.Add(CentroidMover.CalcSSE(listOfIris, centroid1, centroid2, centroid3));
-                        continue;
-                    case (200):
-                        listBoxDisplay.Items.Add(CentroidMover.CalcSSE(listOfIris, centroid1, centroid2, centroid3));
-                        continue;
-                    case (150):
-                        listBoxDisplay.Items.Add(CentroidMover.CalcSSE(listOfIris, centroid1, centroid2, centroid3));
-                        continue;
-                    case (300):
-                        listBoxDisplay.Items.Add(CentroidMover.CalcSSE(listOfIris, centroid1, centroid2, centroid3));
-                        continue;
                 }
                
             }
@@ -374,16 +362,13 @@ namespace Data_Clustering
             int sIndex = 0;
             for (int i = 0; i < listOfIris.Count; i++)
             {
-
                     double result = Centroid.CalculateDistanceIris(listOfIris[f], listOfIris[i]);
                     if (outResult < result)
                     {
                         outResult = result;
                         sIndex = i;
                     }
-                
             }
-         
             //find the 3rd centroid based on the average
             double f3 = (listOfIris[f].PetalL + listOfIris[sIndex].PetalL) / 2;
             double f4 = (listOfIris[f].PetalW + listOfIris[sIndex].PetalW) / 2;
@@ -402,8 +387,10 @@ namespace Data_Clustering
             Centroid c1New;
             Centroid c2New;
             Centroid c3New;
+            double sseOld = CentroidMover.CalcSSE(listOfIris, centroid1, centroid2, centroid3);
             while (stop == false)
             {
+                 sseOld = CentroidMover.CalcSSE(listOfIris, centroid1, centroid2, centroid3);
                 List<Iris> irisC1 = new List<Iris>();
                 List<Iris> irisC2 = new List<Iris>();
                 List<Iris> irisC3 = new List<Iris>();
@@ -422,11 +409,18 @@ namespace Data_Clustering
                 c2New = Centroid.HitungPosisiCentroid(irisC2, "Versicolor");
                 c3New = Centroid.HitungPosisiCentroid(irisC3, "Virginica");
                 double sseNew = CentroidMover.CalcSSE(listOfIris, c1New, c2New, c3New);
-                double sseOld = CentroidMover.CalcSSE(listOfIris, centroid1, centroid2, centroid3);
                 if (c1New == centroid1 && c2New == centroid2 && c3New == centroid3)
+                {
                     stop = true;
+                    MessageBox.Show(iteration.ToString());
+                }
+                   
                 else if (sseOld == sseNew)
+                {
                     stop = true;
+                    MessageBox.Show(iteration.ToString());
+                }
+                    
                 else
                 {
                     centroid1 = c1New;
@@ -446,7 +440,6 @@ namespace Data_Clustering
                         listBoxDisplay.Items.Add(CentroidMover.CalcSSE(listOfIris, centroid1, centroid2, centroid3));
                         continue;
                 }
-               
             }
             foreach (Iris i in listOfIris)
             {

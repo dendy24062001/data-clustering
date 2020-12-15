@@ -45,12 +45,8 @@ namespace Data_Clustering_LIB
             double minimumVirginica = CentroidMover.CountDist(listI[0], irisVirginica);
             foreach (Iris i in listI)
             {
-
-
                 if (irisSetosa == i.Centroid)
                 {
-
-
                     double t = CentroidMover.CountDist(i, irisSetosa);
                     if (minimumSetosa > t)
                     {
