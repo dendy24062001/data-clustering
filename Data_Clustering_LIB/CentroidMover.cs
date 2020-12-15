@@ -45,19 +45,15 @@ namespace Data_Clustering_LIB
             double minimumVirginica = CentroidMover.CountDist(listI[0], irisVirginica);
             foreach (Iris i in listI)
             {
-
-
-                if (irisSetosa == i.Centroid)
+                if (irisSetosa.Name == i.Centroid.Name)
                 {
-
-
                     double t = CentroidMover.CountDist(i, irisSetosa);
                     if (minimumSetosa > t)
                     {
                         minimumSetosa = t;
                     }
                 }
-                else if (irisVersicolor == i.Centroid)
+                else if (irisVersicolor.Name == i.Centroid.Name)
                 {
                     double tV = CentroidMover.CountDist(i, irisVersicolor);
                     if (minimumVersicolor > tV)
@@ -65,7 +61,7 @@ namespace Data_Clustering_LIB
                         minimumVersicolor = tV;
                     }
                 }
-                else
+                else  if (irisVirginica.Name == i.Centroid.Name)
                 {
                     double tVi = CentroidMover.CountDist(i, irisVirginica);
                     if (minimumVirginica > tVi)

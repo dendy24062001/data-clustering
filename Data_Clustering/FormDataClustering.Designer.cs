@@ -264,6 +264,11 @@
             // 
             this.numericUpDownClusterNumber.Location = new System.Drawing.Point(113, 431);
             this.numericUpDownClusterNumber.Margin = new System.Windows.Forms.Padding(2);
+            this.numericUpDownClusterNumber.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
             this.numericUpDownClusterNumber.Minimum = new decimal(new int[] {
             1,
             0,
