@@ -426,6 +426,9 @@ namespace Data_Clustering
                 c3New = Centroid.HitungPosisiCentroid(irisC3);
                 if(c1New == centroid1 && c2New == centroid2 && c3New == centroid3)
                 {
+                    double sseNew = CentroidMover.CalcSSE(listOfIris, c1New, c2New, c3New);
+                    double sseOld = CentroidMover.CalcSSE(listOfIris, centroid1, centroid2, centroid3);
+                    if(sseOld == sseNew)
                     stop = true;
                 }
                 else
