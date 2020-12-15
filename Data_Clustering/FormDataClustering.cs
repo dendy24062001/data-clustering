@@ -196,29 +196,29 @@ namespace Data_Clustering
 
         private void button1_Click(object sender, EventArgs e)
         {
-            int iteration=0;
+            int iteration = 0;
             while (iteration > numericUpDownClusterNumber.Value)
-           {
+            {
                 List<Iris> irisC1 = new List<Iris>();
                 List<Iris> irisC2 = new List<Iris>();
                 List<Iris> irisC3 = new List<Iris>();
                 foreach (Iris i in listOfIris)
                 {
                     i.Centroid = CentroidMover.CountDistAndAssignCentroid(i, centroid1, centroid2, centroid3);
-                    if(i.Centroid == centroid1)
-                    irisC1.Add(i);
+                    if (i.Centroid == centroid1)
+                        irisC1.Add(i);
                     else if (i.Centroid == centroid2)
-                    irisC2.Add(i);
-                    else if(i.Centroid == centroid3)
-                     irisC3.Add(i);
+                        irisC2.Add(i);
+                    else if (i.Centroid == centroid3)
+                        irisC3.Add(i);
                 }
                 centroid1 = Centroid.HitungPosisiCentroid(irisC1);
                 centroid2 = Centroid.HitungPosisiCentroid(irisC2);
                 centroid3 = Centroid.HitungPosisiCentroid(irisC3);
                 switch (iteration)
                 {
-                    case(5):
-                        listBoxDisplay.Items.Add(CentroidMover.CalcSSE(listOfIris,centroid1,centroid2,centroid3));
+                    case (5):
+                        listBoxDisplay.Items.Add(CentroidMover.CalcSSE(listOfIris, centroid1, centroid2, centroid3));
                         continue;
                     case (10):
                         listBoxDisplay.Items.Add(CentroidMover.CalcSSE(listOfIris, centroid1, centroid2, centroid3));
@@ -228,6 +228,21 @@ namespace Data_Clustering
                         continue;
                 }
                 iteration++;
+            }
+            foreach (Iris i in listOfIris)
+            {
+                if (centroid1 == i.Centroid)
+                {
+                    dataGridViewDataCluster.Rows.Add(i.SepalL, i.SepalW, i.PetalL, i.PetalW, "Setosa" );
+                }
+                else if (centroid2 == i.Centroid)
+                {
+                    dataGridViewDataCluster.Rows.Add(i.SepalL, i.SepalW, i.PetalL, i.PetalW, "Versicolor"); 
+                }
+                else if (centroid3 == i.Centroid)
+                {
+                    dataGridViewDataCluster.Rows.Add(i.SepalL, i.SepalW, i.PetalL, i.PetalW, "Virginica"); 
+                }
             }
         }
 
@@ -419,6 +434,21 @@ namespace Data_Clustering
                     centroid2 = c2New;
                     centroid3 = c3New;
                 } 
+            }
+            foreach (Iris i in listOfIris)
+            {
+                if (centroid1 == i.Centroid)
+                {
+                    dataGridViewDataCluster.Rows.Add(i.SepalL, i.SepalW, i.PetalL, i.PetalW, "Setosa");
+                }
+                else if (centroid2 == i.Centroid)
+                {
+                    dataGridViewDataCluster.Rows.Add(i.SepalL, i.SepalW, i.PetalL, i.PetalW, "Versicolor");
+                }
+                else if (centroid3 == i.Centroid)
+                {
+                    dataGridViewDataCluster.Rows.Add(i.SepalL, i.SepalW, i.PetalL, i.PetalW, "Virginica");
+                }
             }
         }
     }

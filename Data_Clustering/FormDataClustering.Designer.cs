@@ -160,7 +160,7 @@
             // 
             this.listBoxDisplay.FormattingEnabled = true;
             this.listBoxDisplay.Location = new System.Drawing.Point(9, 271);
-            this.listBoxDisplay.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.listBoxDisplay.Margin = new System.Windows.Forms.Padding(2);
             this.listBoxDisplay.Name = "listBoxDisplay";
             this.listBoxDisplay.Size = new System.Drawing.Size(583, 147);
             this.listBoxDisplay.TabIndex = 1;
@@ -168,7 +168,7 @@
             // buttonShow
             // 
             this.buttonShow.Location = new System.Drawing.Point(535, 427);
-            this.buttonShow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonShow.Margin = new System.Windows.Forms.Padding(2);
             this.buttonShow.Name = "buttonShow";
             this.buttonShow.Size = new System.Drawing.Size(56, 19);
             this.buttonShow.TabIndex = 2;
@@ -185,8 +185,8 @@
             this.PetalLength,
             this.PetalWidth,
             this.Species});
-            this.dataGridViewDataCluster.Location = new System.Drawing.Point(9, 32);
-            this.dataGridViewDataCluster.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataGridViewDataCluster.Location = new System.Drawing.Point(9, 26);
+            this.dataGridViewDataCluster.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridViewDataCluster.Name = "dataGridViewDataCluster";
             this.dataGridViewDataCluster.RowHeadersWidth = 51;
             this.dataGridViewDataCluster.RowTemplate.Height = 24;
@@ -231,7 +231,7 @@
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(174, 456);
-            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(65, 19);
             this.button1.TabIndex = 4;
@@ -242,7 +242,7 @@
             // buttonCoba
             // 
             this.buttonCoba.Location = new System.Drawing.Point(535, 482);
-            this.buttonCoba.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonCoba.Margin = new System.Windows.Forms.Padding(2);
             this.buttonCoba.Name = "buttonCoba";
             this.buttonCoba.Size = new System.Drawing.Size(56, 19);
             this.buttonCoba.TabIndex = 5;
@@ -263,7 +263,7 @@
             // numericUpDownClusterNumber
             // 
             this.numericUpDownClusterNumber.Location = new System.Drawing.Point(113, 431);
-            this.numericUpDownClusterNumber.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numericUpDownClusterNumber.Margin = new System.Windows.Forms.Padding(2);
             this.numericUpDownClusterNumber.Minimum = new decimal(new int[] {
             1,
             0,
@@ -282,7 +282,7 @@
             // 
             this.buttonDetermine.AutoSize = true;
             this.buttonDetermine.Location = new System.Drawing.Point(174, 429);
-            this.buttonDetermine.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonDetermine.Margin = new System.Windows.Forms.Padding(2);
             this.buttonDetermine.Name = "buttonDetermine";
             this.buttonDetermine.Size = new System.Drawing.Size(65, 23);
             this.buttonDetermine.TabIndex = 8;
@@ -318,7 +318,7 @@
             this.Controls.Add(this.listBoxDisplay);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FormDataClustering";
             this.Text = "Data Clustering";
             this.Load += new System.EventHandler(this.FormDataClustering_Load);
