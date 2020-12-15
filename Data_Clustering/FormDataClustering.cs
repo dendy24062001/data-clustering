@@ -219,6 +219,7 @@ namespace Data_Clustering
                 centroid2 = Centroid.HitungPosisiCentroid(irisC2, "Versicolor");
                 centroid3 = Centroid.HitungPosisiCentroid(irisC3, "Virginica");
                 iteration++;
+                listBoxDisplay.Items.Add(CentroidMover.CalcSSE(listOfIris, centroid1, centroid2, centroid3));
                 listSSE.Add( CentroidMover.CalcSSE(listOfIris, centroid1, centroid2, centroid3));
                
             }
@@ -241,19 +242,7 @@ namespace Data_Clustering
             MessageBox.Show("Setosa : " + irisC1.Count.ToString() + "\nVersicolor : " + irisC2.Count.ToString() + "\nVirginica : " + irisC3.Count.ToString(), "Setosa, VersiColor, and Virginica Amount :"); 
         }
 
-        private void buttonCoba_Click(object sender, EventArgs e)
-        {
-            Random random = new Random();
-
-            double rand1 = 0, rand2 = 0, rand3 = 0, rand4 = 0;
-
-            rand1 = random.NextDouble();
-            rand2 = random.NextDouble();
-            rand3 = random.NextDouble();
-            rand4 = random.NextDouble();
-
-            MessageBox.Show($"F1 : {rand1}, F2 : {rand2}, F3 : {rand3}, F4 : {rand4}");
-        }
+      
 
         private void buttonCoba_Click_1(object sender, EventArgs e)
         {
@@ -266,91 +255,10 @@ namespace Data_Clustering
 
         }
 
-        /*private void Try()
-        {
-            List<Iris> listSetosa = new List<Iris>();
-            List<Iris> listVersicolor = new List<Iris>();
-            List<Iris> listVirginica = new List<Iris>();
-
-            Random random = new Random();
-
-            Centroid IrisSetosa = new Centroid("Setosa", random);
-            Centroid IrisVersicolor = new Centroid("Versicolor", random);
-            Centroid IrisVirginica = new Centroid("Virginica", random);
-
-            foreach (Iris iris in listOfIris)
-            {
-                iris.Centroid = CentroidMover.CountDistAndAssignCentroid(iris, IrisSetosa, IrisVersicolor, IrisVirginica);
-                dataGridViewDataCluster.Rows.Add(
-                    iris.SepalL,
-                    iris.SepalW,
-                    iris.PetalL,
-                    iris.PetalW,
-                    iris.Centroid.Name);
-            }
-
-            foreach(Iris iris in listOfIris)
-            {
-                if(iris.Centroid.Name == IrisSetosa.Name)
-                {
-                    listSetosa.Add(iris);
-                }
-                else if(iris.Centroid.Name == IrisVersicolor.Name)
-                {
-                    listVersicolor.Add(iris);
-                }
-                else
-                {
-                    listVirginica.Add(iris);
-                }
-            }*/
-
-            
-
-            /*
-            listBoxDisplay.Items.Add($"Setosa : F1 : {IrisSetosa.F1, 2}, F2 : {IrisSetosa.F2}, F3 : {IrisSetosa.F3}, F4 : {IrisSetosa.F4}");
-            listBoxDisplay.Items.Add($"Versicolor : F1 : {IrisVersicolor.F1}, F2 : {IrisVersicolor.F2}, F3 : {IrisVersicolor.F3}, F4 : {IrisVersicolor.F4}");
-            listBoxDisplay.Items.Add($"Virginica : F1 : {IrisVirginica.F1}, F2 : {IrisVirginica.F2}, F3 : {IrisVirginica.F3}, F4 : {IrisVirginica.F4}");
-            
-
-
-        }*/
+       
 
         private void buttonDetermine_Click(object sender, EventArgs e)
         {
-            //Random random = new Random();
-            //Iris cluster;
-
-            //List<Iris> listOfCluster = new List<Iris>();
-
-            //double max;
-            //int detRandom, clusterNumb;
-            //detRandom = random.Next(0, listOfIris.Count - 1);
-            //clusterNumb = (int)numericUpDownClusterNumber.Value;
-
-            //cluster = listOfIris[detRandom];
-            //listOfCluster.Add(cluster);
-            //foreach(Iris iris in listOfIris)
-            //{
-            //    iris.calcDistance(cluster);               
-            //}
-
-            //for(int i = 1; i < clusterNumb; i++)
-            //{
-            //    max = listOfIris[0].DistanceSquare;
-            //    for (int j = 1; j < listOfIris.Count; j++)
-            //    {
-            //        if (max < listOfIris[i].DistanceSquare)
-            //        {
-            //            cluster = listOfIris[i];
-            //        }
-            //    }
-            //    listOfCluster.Add(cluster);
-            //    foreach (Iris iris in listOfIris)
-            //    {
-            //        iris.calcDistance(cluster);
-            //    }
-            //}
             Random rnd = new Random();
             int f = 0;
             f = rnd.Next(1, listOfIris.Count - 1);
@@ -466,27 +374,42 @@ namespace Data_Clustering
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Title = "Save List";
-            saveFileDialog.FileName = "Hasil.txt";
-            saveFileDialog.Filter = "Txt files (*.txt)|*.txt|All files (*.*)|*.*";
-            saveFileDialog.CheckPathExists = true;
-            saveFileDialog.DefaultExt = ".txt";
-            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            int i = 0;
+            SaveFileDialog saveFile = new SaveFileDialog();
+            if (saveFile.ShowDialog() == DialogResult.OK)
             {
-                //Punyaku gk iso pasti ekluar e symbol gk jelas
-                string line = "\n";
-                foreach (double i in listSSE)
+                using (Stream s = File.Open(saveFile.FileName, FileMode.Create))
+                using(StreamWriter file = new StreamWriter(s))
                 {
-                    line += i.ToString();
-                    line += "\n";
+                    foreach(double angka in listSSE)
+                    {
+                        i++;
+                        file.WriteLine($"{angka}, Iterasi ke-{i}");
+                    }
+
+                    double smallest = Smallest(listSSE);
+
+                    file.WriteLine($"SSE Terkecil {smallest}");
+
                 }
-                
-                FileStream file = new FileStream(saveFileDialog.FileName, FileMode.Create, FileAccess.Write);
-                BinaryFormatter binary = new BinaryFormatter();
-                binary.Serialize(file, line);
-                file.Close();
             }
+        }
+
+      
+
+        private double Smallest(List<double> sse)
+        {
+            double small = sse[0];
+
+            foreach(double number in sse)
+            {
+                if (number < small)
+                {
+                    small = number;
+                }
+            }
+
+            return small;
         }
     }
 }
