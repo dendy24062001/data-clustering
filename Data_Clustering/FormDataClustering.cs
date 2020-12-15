@@ -222,22 +222,23 @@ namespace Data_Clustering
                 listSSE.Add( CentroidMover.CalcSSE(listOfIris, centroid1, centroid2, centroid3));
                
             }
-            MessageBox.Show(irisC1.Count.ToString() + "\n" + irisC2.Count.ToString() + "\n " + irisC3.Count.ToString(), "Setosa, VersiColor, and Virginica Amount :");
+            dataGridViewDataCluster.Rows.Clear();
             foreach (Iris i in listOfIris)
             {
-                if (centroid1 == i.Centroid)
+                if (centroid1.Name == i.Centroid.Name)
                 {
                     dataGridViewDataCluster.Rows.Add(i.SepalL, i.SepalW, i.PetalL, i.PetalW, "Setosa");
                 }
-                else if (centroid2 == i.Centroid)
+                else if (centroid2.Name == i.Centroid.Name)
                 {
                     dataGridViewDataCluster.Rows.Add(i.SepalL, i.SepalW, i.PetalL, i.PetalW, "Versicolor");
                 }
-                else if (centroid3 == i.Centroid)
+                else if (centroid3.Name == i.Centroid.Name)
                 {
                     dataGridViewDataCluster.Rows.Add(i.SepalL, i.SepalW, i.PetalL, i.PetalW, "Virginica");
                 }
             }
+            MessageBox.Show("Setosa : " + irisC1.Count.ToString() + "\nVersicolor : " + irisC2.Count.ToString() + "\nVirginica : " + irisC3.Count.ToString(), "Setosa, VersiColor, and Virginica Amount :"); 
         }
 
         private void buttonCoba_Click(object sender, EventArgs e)
@@ -447,20 +448,20 @@ namespace Data_Clustering
             dataGridViewDataCluster.Rows.Clear();
             foreach (Iris i in listOfIris)
             {
-                if (centroid1 == i.Centroid)
+                if (centroid1.Name == i.Centroid.Name)
                 {
                     dataGridViewDataCluster.Rows.Add(i.SepalL, i.SepalW, i.PetalL, i.PetalW, "Setosa");
                 }
-                else if (centroid2 == i.Centroid)
+                else if (centroid2.Name == i.Centroid.Name)
                 {
                     dataGridViewDataCluster.Rows.Add(i.SepalL, i.SepalW, i.PetalL, i.PetalW, "Versicolor");
                 }
-                else if (centroid3 == i.Centroid)
+                else if (centroid3.Name == i.Centroid.Name)
                 {
                     dataGridViewDataCluster.Rows.Add(i.SepalL, i.SepalW, i.PetalL, i.PetalW, "Virginica");
                 }
             }
-            MessageBox.Show(irisC1.Count.ToString()+"\n"+ irisC2.Count.ToString() +"\n "+ irisC3.Count.ToString(), "Setosa, VersiColor, and Virginica Amount :");
+            MessageBox.Show("Setosa : " + irisC1.Count.ToString() + "\nVersicolor : " + irisC2.Count.ToString() + "\nVirginica : " + irisC3.Count.ToString(), "Setosa, VersiColor, and Virginica Amount :");
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
