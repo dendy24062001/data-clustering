@@ -38,36 +38,40 @@ namespace Data_Clustering_LIB
             double distance = Math.Sqrt(Math.Pow((iris.SepalL - (double)centroid.F1), 2) + Math.Pow((iris.SepalW - (double)centroid.F2), 2) + Math.Pow((iris.PetalL - (double)centroid.F3), 2) + Math.Pow((iris.PetalW - (double)centroid.F4), 2));
             return distance;
         }
-        private static double CalcSSE(List<Iris> listI, Centroid irisSetosa, Centroid irisVersicolor, Centroid irisVirginica)
+        public static double CalcSSE(List<Iris> listI, Centroid irisSetosa, Centroid irisVersicolor, Centroid irisVirginica)
         {
             double minimumSetosa = CentroidMover.CountDist(listI[0], irisSetosa);
             double minimumVersicolor = CentroidMover.CountDist(listI[0], irisVersicolor);
             double minimumVirginica = CentroidMover.CountDist(listI[0], irisVirginica);
             foreach (Iris i in listI)
             {
-                switch (i.Centroid.Name)
+
+
+                if (irisSetosa == i.Centroid)
                 {
-                    case ("Setosa"):
-                        double t = CentroidMover.CountDist(i, irisSetosa);
-                        if (minimumSetosa > t)
-                        {
-                            minimumSetosa = t;
-                        }
-                        continue;
-                    case ("Versicolor"):
-                        double tV = CentroidMover.CountDist(i, irisVersicolor);
-                        if (minimumVersicolor > tV)
-                        {
-                            minimumVersicolor = tV;
-                        }
-                        continue;
-                    case ("Virginica"):
-                        double tVi = CentroidMover.CountDist(i, irisVirginica);
-                        if (minimumVirginica > tVi)
-                        {
-                            minimumVirginica = tVi;
-                        }
-                        continue;
+
+
+                    double t = CentroidMover.CountDist(i, irisSetosa);
+                    if (minimumSetosa > t)
+                    {
+                        minimumSetosa = t;
+                    }
+                }
+                else if (irisVersicolor == i.Centroid)
+                {
+                    double tV = CentroidMover.CountDist(i, irisVersicolor);
+                    if (minimumVersicolor > tV)
+                    {
+                        minimumVersicolor = tV;
+                    }
+                }
+                else
+                {
+                    double tVi = CentroidMover.CountDist(i, irisVirginica);
+                    if (minimumVirginica > tVi)
+                    {
+                        minimumVirginica = tVi;
+                    }
                 }
             }
             double total = Math.Pow(minimumSetosa, 2) + Math.Pow(minimumVersicolor, 2) + Math.Pow(minimumVirginica, 2);
