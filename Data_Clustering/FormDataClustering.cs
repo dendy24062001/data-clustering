@@ -28,7 +28,7 @@ namespace Data_Clustering
         Centroid centroid3;
         Centroid centroid2;
         Centroid centroid1;
-        string line = "";
+        List<double> listSSE;
 
 
         public FormDataClustering()
@@ -195,7 +195,7 @@ namespace Data_Clustering
 
         private void button1_Click(object sender, EventArgs e)
         {
-            line = "";
+            listSSE = new List<double>();
             int iteration = 0;
             List<Iris> irisC1 = new List<Iris>();
             List<Iris> irisC2 = new List<Iris>();
@@ -219,10 +219,10 @@ namespace Data_Clustering
                 centroid2 = Centroid.HitungPosisiCentroid(irisC2, "Versicolor");
                 centroid3 = Centroid.HitungPosisiCentroid(irisC3, "Virginica");
                 iteration++;
-                line += CentroidMover.CalcSSE(listOfIris, centroid1, centroid2, centroid3).ToString();
-                line += "\n";
+                listSSE.Add( CentroidMover.CalcSSE(listOfIris, centroid1, centroid2, centroid3));
+               
             }
-            MessageBox.Show(irisC1.Count.ToString(), irisC2.Count.ToString() + " " + irisC3.Count.ToString());
+            MessageBox.Show(irisC1.Count.ToString() + "\n" + irisC2.Count.ToString() + "\n " + irisC3.Count.ToString(), "Setosa, VersiColor, and Virginica Amount :");
             foreach (Iris i in listOfIris)
             {
                 if (centroid1 == i.Centroid)
@@ -381,7 +381,7 @@ namespace Data_Clustering
 
         private void button2_Click(object sender, EventArgs e)
         {
-            line = "";
+            listSSE = new List<double>();
             int iteration = 0;
             bool stop = false;
             Centroid c1New;
@@ -423,13 +423,13 @@ namespace Data_Clustering
                     if (c1New == centroid1 && c2New == centroid2 && c3New == centroid3)
                     {
                         stop = true;
-                        MessageBox.Show(iteration.ToString());
+                        MessageBox.Show("Your Dataset is finished after  " + iteration.ToString() + " of iteration");
                     }
 
                     else if (sseOld == sseNew)
                     {
                         stop = true;
-                        MessageBox.Show(iteration.ToString());
+                        MessageBox.Show("Your Dataset is finished after  " + iteration.ToString() + " of iteration");
                     }
 
                     else
@@ -441,8 +441,8 @@ namespace Data_Clustering
                 
                 iteration++;
                         listBoxDisplay.Items.Add(CentroidMover.CalcSSE(listOfIris, centroid1, centroid2, centroid3));
-                line += CentroidMover.CalcSSE(listOfIris, centroid1, centroid2, centroid3).ToString();
-                line += "\n";
+                listSSE.Add(CentroidMover.CalcSSE(listOfIris, centroid1, centroid2, centroid3));
+              
             }
             dataGridViewDataCluster.Rows.Clear();
             foreach (Iris i in listOfIris)
@@ -460,7 +460,7 @@ namespace Data_Clustering
                     dataGridViewDataCluster.Rows.Add(i.SepalL, i.SepalW, i.PetalL, i.PetalW, "Virginica");
                 }
             }
-            MessageBox.Show(irisC1.Count.ToString(), irisC2.Count.ToString() +" "+ irisC3.Count.ToString());
+            MessageBox.Show(irisC1.Count.ToString()+"\n"+ irisC2.Count.ToString() +"\n "+ irisC3.Count.ToString(), "Setosa, VersiColor, and Virginica Amount :");
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
@@ -473,6 +473,13 @@ namespace Data_Clustering
             saveFileDialog.DefaultExt = ".txt";
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
+                //Punyaku gk iso pasti ekluar e symbol gk jelas
+                string line = "\n";
+                foreach (double i in listSSE)
+                {
+                    line += i.ToString();
+                    line += "\n";
+                }
                 
                 FileStream file = new FileStream(saveFileDialog.FileName, FileMode.Create, FileAccess.Write);
                 BinaryFormatter binary = new BinaryFormatter();
