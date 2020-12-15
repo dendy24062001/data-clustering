@@ -45,29 +45,33 @@ namespace Data_Clustering_LIB
             double minimumVirginica = CentroidMover.CountDist(listI[0], irisVirginica);
             foreach (Iris i in listI)
             {
-                switch (i.Centroid.Name)
+
+
+                if (irisSetosa == i.Centroid)
                 {
-                    case ("Setosa"):
-                        double t = CentroidMover.CountDist(i, irisSetosa);
-                        if (minimumSetosa > t)
-                        {
-                            minimumSetosa = t;
-                        }
-                        continue;
-                    case ("Versicolor"):
-                        double tV = CentroidMover.CountDist(i, irisVersicolor);
-                        if (minimumVersicolor > tV)
-                        {
-                            minimumVersicolor = tV;
-                        }
-                        continue;
-                    case ("Virginica"):
-                        double tVi = CentroidMover.CountDist(i, irisVirginica);
-                        if (minimumVirginica > tVi)
-                        {
-                            minimumVirginica = tVi;
-                        }
-                        continue;
+
+
+                    double t = CentroidMover.CountDist(i, irisSetosa);
+                    if (minimumSetosa > t)
+                    {
+                        minimumSetosa = t;
+                    }
+                }
+                else if (irisVersicolor == i.Centroid)
+                {
+                    double tV = CentroidMover.CountDist(i, irisVersicolor);
+                    if (minimumVersicolor > tV)
+                    {
+                        minimumVersicolor = tV;
+                    }
+                }
+                else
+                {
+                    double tVi = CentroidMover.CountDist(i, irisVirginica);
+                    if (minimumVirginica > tVi)
+                    {
+                        minimumVirginica = tVi;
+                    }
                 }
             }
             double total = Math.Pow(minimumSetosa, 2) + Math.Pow(minimumVersicolor, 2) + Math.Pow(minimumVirginica, 2);

@@ -14,14 +14,14 @@ namespace Data_Clustering_LIB
         private double f3;
         private double f4;
 
-        public Centroid(double f1, double f2, double f3, double f4)
+        public Centroid(double f1, double f2, double f3, double f4, string name)
         {
             F1 = f1;
             F2 = f2;
             F3 = f3;
             F4 = f4;
         }
-        public Centroid(Iris i)
+        public Centroid(Iris i, string name)
         {
             F1 = i.SepalL;
             F2 = i.SepalW;
@@ -92,7 +92,7 @@ namespace Data_Clustering_LIB
             F4 = f4 / divider;
         }
 
-        public static Centroid  HitungPosisiCentroid(List<Iris> irisListInput)
+        public static Centroid  HitungPosisiCentroid(List<Iris> irisListInput, string  n)
         {
             //double result = (iris.PetalL + iris.PetalW + iris.SepalL + iris.SepalW) / 4;
 
@@ -118,7 +118,7 @@ namespace Data_Clustering_LIB
             pLength /= i;
             pWidth /= i;
 
-            return clusterResult = new Centroid(sLength, sWidth, pLength, pWidth);
+            return clusterResult = new Centroid(sLength, sWidth, pLength, pWidth, n);
         }
         public static double CalculateDistanceIris(Iris obj, Iris cluster)
         {

@@ -75,40 +75,36 @@ namespace Data_Clustering
                 {
                     string[] fields = csvParser.ReadFields();
 
-                    /*Iris iris = new Iris(
-                        Convert.ToDouble(fields[1]),
-                        Convert.ToDouble(fields[2]),
-                        Convert.ToDouble(fields[3]),
-                        Convert.ToDouble(fields[4]));
-                        */
+                    // Iris iris = new Iris(
+                    //     Convert.ToDouble(fields[1]),
+                    //     Convert.ToDouble(fields[2]),
+                    //     Convert.ToDouble(fields[3]),
+                    //     Convert.ToDouble(fields[4]));
+
+
+
                     Iris iris = new Iris(
-                        double.Parse(fields[1]),
-                        double.Parse(fields[2]),
-                        double.Parse(fields[3]),
-                        double.Parse(fields[4]));
+                         double.Parse(fields[1]),
+                         double.Parse(fields[2]),
+                         double.Parse(fields[3]),
+                         double.Parse(fields[4]));
 
-                    /*Iris iris = new Iris(
-                        double.Parse(fields[1]), 
-                        double.Parse(fields[2]), 
-                        double.Parse(fields[3]), 
-                        double.Parse(fields[4]));*/
+                    // Iris iris = new Iris(
+                    //     fields[1],
+                    //     fields[2],
+                    //     fields[3],
+                    //     fields[4]);
 
-                    /*Iris iris = new Iris(
-                        fields[1],
-                        fields[2],
-                        fields[3],
-                        fields[4]);*/
+                    //Iris iris = new Iris(
+                    //    double.Parse(fields[1].Replace('.', ',')),
+                    //    double.Parse(fields[2].Replace('.', ',')),
+                    //    double.Parse(fields[3].Replace('.', ',')),
+                    //    double.Parse(fields[4].Replace('.', ',')));
 
-                    /*Iris iris = new Iris(
-                        double.Parse(fields[1].Replace('.', ',')),
-                        double.Parse(fields[2].Replace('.', ',')),
-                        double.Parse(fields[3].Replace('.', ',')),
-                        double.Parse(fields[4].Replace('.', ',')));*/
 
-                   
-                    //listOfIris.Add(iris);
+                    listOfIris.Add(iris);
 
-                    //listString.Add(fields[1]);
+                    listString.Add(fields[1]);
                 }
             }
         }
@@ -197,7 +193,7 @@ namespace Data_Clustering
         private void button1_Click(object sender, EventArgs e)
         {
             int iteration = 0;
-            while (iteration > numericUpDownClusterNumber.Value)
+            while (iteration < numericUpDownClusterNumber.Value)
             {
                 List<Iris> irisC1 = new List<Iris>();
                 List<Iris> irisC2 = new List<Iris>();
@@ -212,9 +208,25 @@ namespace Data_Clustering
                     else if (i.Centroid == centroid3)
                         irisC3.Add(i);
                 }
-                centroid1 = Centroid.HitungPosisiCentroid(irisC1);
-                centroid2 = Centroid.HitungPosisiCentroid(irisC2);
-                centroid3 = Centroid.HitungPosisiCentroid(irisC3);
+                centroid1 = Centroid.HitungPosisiCentroid(irisC1, "Setosa");
+                centroid2 = Centroid.HitungPosisiCentroid(irisC2, "Versicolor");
+                centroid3 = Centroid.HitungPosisiCentroid(irisC3, "Virginica");
+                iteration++;
+                foreach (Iris i in listOfIris)
+                {
+                    if (centroid1 == i.Centroid)
+                    {
+                        dataGridViewDataCluster.Rows.Add(i.SepalL, i.SepalW, i.PetalL, i.PetalW, "Setosa");
+                    }
+                    else if (centroid2 == i.Centroid)
+                    {
+                        dataGridViewDataCluster.Rows.Add(i.SepalL, i.SepalW, i.PetalL, i.PetalW, "Versicolor");
+                    }
+                    else if (centroid3 == i.Centroid)
+                    {
+                        dataGridViewDataCluster.Rows.Add(i.SepalL, i.SepalW, i.PetalL, i.PetalW, "Virginica");
+                    }
+                }
                 switch (iteration)
                 {
                     case (5):
@@ -226,23 +238,20 @@ namespace Data_Clustering
                     case (15):
                         listBoxDisplay.Items.Add(CentroidMover.CalcSSE(listOfIris, centroid1, centroid2, centroid3));
                         continue;
+                    case (100):
+                        listBoxDisplay.Items.Add(CentroidMover.CalcSSE(listOfIris, centroid1, centroid2, centroid3));
+                        continue;
+                    case (200):
+                        listBoxDisplay.Items.Add(CentroidMover.CalcSSE(listOfIris, centroid1, centroid2, centroid3));
+                        continue;
+                    case (150):
+                        listBoxDisplay.Items.Add(CentroidMover.CalcSSE(listOfIris, centroid1, centroid2, centroid3));
+                        continue;
+                    case (300):
+                        listBoxDisplay.Items.Add(CentroidMover.CalcSSE(listOfIris, centroid1, centroid2, centroid3));
+                        continue;
                 }
-                iteration++;
-            }
-            foreach (Iris i in listOfIris)
-            {
-                if (centroid1 == i.Centroid)
-                {
-                    dataGridViewDataCluster.Rows.Add(i.SepalL, i.SepalW, i.PetalL, i.PetalW, "Setosa" );
-                }
-                else if (centroid2 == i.Centroid)
-                {
-                    dataGridViewDataCluster.Rows.Add(i.SepalL, i.SepalW, i.PetalL, i.PetalW, "Versicolor"); 
-                }
-                else if (centroid3 == i.Centroid)
-                {
-                    dataGridViewDataCluster.Rows.Add(i.SepalL, i.SepalW, i.PetalL, i.PetalW, "Virginica"); 
-                }
+               
             }
         }
 
@@ -262,11 +271,11 @@ namespace Data_Clustering
 
         private void buttonCoba_Click_1(object sender, EventArgs e)
         {
-            string path = @"D:\Tugas Proyek DatMin\proyek utama\data-clustering\Iris Dataset\Iris.csv";
+            string path = @"C:\Users\Golden\Documents\PBD\data-clustering\Iris Dataset\Iris.csv";
             CsvParse(path);
            if(listOfIris.Count > 0)
             {
-                //Try();
+                MessageBox.Show(listOfIris.Count.ToString());
             }
 
         }
@@ -357,33 +366,33 @@ namespace Data_Clustering
             //    }
             //}
             Random rnd = new Random();
-            int f = rnd.Next(0, listOfIris.Count);
+            int f = 0;
+            f = rnd.Next(1, listOfIris.Count - 1);
 
             //get the highest distance and set it as 2nd point
             double outResult = 0;
             int sIndex = 0;
             for (int i = 0; i < listOfIris.Count; i++)
             {
-                if (i != f)
-                {
+
                     double result = Centroid.CalculateDistanceIris(listOfIris[f], listOfIris[i]);
                     if (outResult < result)
                     {
                         outResult = result;
                         sIndex = i;
                     }
-                }
+                
             }
-
+         
             //find the 3rd centroid based on the average
-            double f1 = (listOfIris[f].PetalL + listOfIris[sIndex].PetalL) / 2;
-            double f2 = (listOfIris[f].PetalW + listOfIris[sIndex].PetalW) / 2;
-            double f3 = (listOfIris[f].SepalL + listOfIris[sIndex].SepalL) / 2;
-            double f4 = (listOfIris[f].SepalW + listOfIris[sIndex].SepalL) / 2;
+            double f3 = (listOfIris[f].PetalL + listOfIris[sIndex].PetalL) / 2;
+            double f4 = (listOfIris[f].PetalW + listOfIris[sIndex].PetalW) / 2;
+            double f1 = (listOfIris[f].SepalL + listOfIris[sIndex].SepalL) / 2;
+            double f2 = (listOfIris[f].SepalW + listOfIris[sIndex].SepalW) / 2;
 
-            centroid1 = new Centroid(listOfIris[f]);
-            centroid2 = new Centroid(listOfIris[sIndex]);
-            centroid3 = new Centroid(f1, f2, f3, f4);
+            centroid1 = new Centroid(listOfIris[f].SepalL, listOfIris[f].SepalW, listOfIris[f].PetalL, listOfIris[f].PetalW, "Setosa");
+            centroid2 = new Centroid(listOfIris[sIndex].SepalL, listOfIris[sIndex].SepalW, listOfIris[sIndex].PetalL, listOfIris[sIndex].PetalW, "Versicolor");
+            centroid3 = new Centroid(f1, f2, f3, f4, "Virginica");
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -408,6 +417,23 @@ namespace Data_Clustering
                     else if (i.Centroid == centroid3)
                         irisC3.Add(i);
                 }
+                
+                c1New = Centroid.HitungPosisiCentroid(irisC1, "Setosa");
+                c2New = Centroid.HitungPosisiCentroid(irisC2, "Versicolor");
+                c3New = Centroid.HitungPosisiCentroid(irisC3, "Virginica");
+                double sseNew = CentroidMover.CalcSSE(listOfIris, c1New, c2New, c3New);
+                double sseOld = CentroidMover.CalcSSE(listOfIris, centroid1, centroid2, centroid3);
+                if (c1New == centroid1 && c2New == centroid2 && c3New == centroid3)
+                    stop = true;
+                else if (sseOld == sseNew)
+                    stop = true;
+                else
+                {
+                    centroid1 = c1New;
+                    centroid2 = c2New;
+                    centroid3 = c3New;
+                }
+                iteration++;
                 switch (iteration)
                 {
                     case (5):
@@ -420,23 +446,7 @@ namespace Data_Clustering
                         listBoxDisplay.Items.Add(CentroidMover.CalcSSE(listOfIris, centroid1, centroid2, centroid3));
                         continue;
                 }
-                iteration++;
-                c1New = Centroid.HitungPosisiCentroid(irisC1);
-                c2New = Centroid.HitungPosisiCentroid(irisC2);
-                c3New = Centroid.HitungPosisiCentroid(irisC3);
-                if(c1New == centroid1 && c2New == centroid2 && c3New == centroid3)
-                {
-                    double sseNew = CentroidMover.CalcSSE(listOfIris, c1New, c2New, c3New);
-                    double sseOld = CentroidMover.CalcSSE(listOfIris, centroid1, centroid2, centroid3);
-                    if(sseOld == sseNew)
-                    stop = true;
-                }
-                else
-                {
-                    centroid1 = c1New;
-                    centroid2 = c2New;
-                    centroid3 = c3New;
-                } 
+               
             }
             foreach (Iris i in listOfIris)
             {
