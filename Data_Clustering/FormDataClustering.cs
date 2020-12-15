@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -27,6 +28,7 @@ namespace Data_Clustering
         Centroid centroid3;
         Centroid centroid2;
         Centroid centroid1;
+        string line = "";
 
 
         public FormDataClustering()
@@ -185,13 +187,15 @@ namespace Data_Clustering
 
         private void FormDataClustering_Load(object sender, EventArgs e)
         {
-
+            buttonAutoRun.Visible = false;
+            buttonRun.Visible = false;
         }
         #endregion
 
 
         private void button1_Click(object sender, EventArgs e)
         {
+            line = "";
             int iteration = 0;
             List<Iris> irisC1 = new List<Iris>();
             List<Iris> irisC2 = new List<Iris>();
@@ -215,20 +219,8 @@ namespace Data_Clustering
                 centroid2 = Centroid.HitungPosisiCentroid(irisC2, "Versicolor");
                 centroid3 = Centroid.HitungPosisiCentroid(irisC3, "Virginica");
                 iteration++;
-               
-                switch (iteration)
-                {
-                    case (5):
-                        listBoxDisplay.Items.Add(CentroidMover.CalcSSE(listOfIris, centroid1, centroid2, centroid3));
-                        continue;
-                    case (10):
-                        listBoxDisplay.Items.Add(CentroidMover.CalcSSE(listOfIris, centroid1, centroid2, centroid3));
-                        continue;
-                    case (15):
-                        listBoxDisplay.Items.Add(CentroidMover.CalcSSE(listOfIris, centroid1, centroid2, centroid3));
-                        continue;
-                }
-               
+                line += CentroidMover.CalcSSE(listOfIris, centroid1, centroid2, centroid3).ToString();
+                line += "\n";
             }
             MessageBox.Show(irisC1.Count.ToString(), irisC2.Count.ToString() + " " + irisC3.Count.ToString());
             foreach (Iris i in listOfIris)
@@ -383,10 +375,13 @@ namespace Data_Clustering
             centroid1 = new Centroid(listOfIris[f].SepalL, listOfIris[f].SepalW, listOfIris[f].PetalL, listOfIris[f].PetalW, "Setosa");
             centroid2 = new Centroid(listOfIris[sIndex].SepalL, listOfIris[sIndex].SepalW, listOfIris[sIndex].PetalL, listOfIris[sIndex].PetalW, "Versicolor");
             centroid3 = new Centroid(f1, f2, f3, f4, "Virginica");
+            buttonAutoRun.Visible = true;
+            buttonRun.Visible = true;
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            line = "";
             int iteration = 0;
             bool stop = false;
             Centroid c1New;
@@ -395,59 +390,59 @@ namespace Data_Clustering
             List<Iris> irisC1 = new List<Iris>();
             List<Iris> irisC2 = new List<Iris>();
             List<Iris> irisC3 = new List<Iris>();
-            double sseOld = CentroidMover.CalcSSE(listOfIris, centroid1, centroid2, centroid3);
+            
             while (stop == false)
             {
-                 sseOld = CentroidMover.CalcSSE(listOfIris, centroid1, centroid2, centroid3);
-                 irisC1 = new List<Iris>();
-                 irisC2 = new List<Iris>();
-                 irisC3 = new List<Iris>();
+                irisC1 = new List<Iris>();
+                irisC2 = new List<Iris>();
+                irisC3 = new List<Iris>();
+                double sseOld = 0;
                 foreach (Iris i in listOfIris)
                 {
+                    if(iteration != 0)
+                         sseOld = CentroidMover.CalcSSE(listOfIris, centroid1, centroid2, centroid3);
                     i.Centroid = CentroidMover.CountDistAndAssignCentroid(i, centroid1, centroid2, centroid3);
                     if (i.Centroid == centroid1)
+                    {
                         irisC1.Add(i);
+                    }
                     else if (i.Centroid == centroid2)
+                    {
                         irisC2.Add(i);
+                    }
                     else if (i.Centroid == centroid3)
+                    {
                         irisC3.Add(i);
+                    }
                 }
                 
-                c1New = Centroid.HitungPosisiCentroid(irisC1, "Setosa");
-                c2New = Centroid.HitungPosisiCentroid(irisC2, "Versicolor");
-                c3New = Centroid.HitungPosisiCentroid(irisC3, "Virginica");
-                double sseNew = CentroidMover.CalcSSE(listOfIris, c1New, c2New, c3New);
-                if (c1New == centroid1 && c2New == centroid2 && c3New == centroid3)
-                {
-                    stop = true;
-                    MessageBox.Show(iteration.ToString());
-                }
-                   
-                else if (sseOld == sseNew)
-                {
-                    stop = true;
-                    MessageBox.Show(iteration.ToString());
-                }
-                    
-                else
-                {
-                    centroid1 = c1New;
-                    centroid2 = c2New;
-                    centroid3 = c3New;
-                }
+                    c1New = Centroid.HitungPosisiCentroid(irisC1, "Setosa");
+                    c2New = Centroid.HitungPosisiCentroid(irisC2, "Versicolor");
+                    c3New = Centroid.HitungPosisiCentroid(irisC3, "Virginica");
+                    double sseNew = CentroidMover.CalcSSE(listOfIris, c1New, c2New, c3New);
+                    if (c1New == centroid1 && c2New == centroid2 && c3New == centroid3)
+                    {
+                        stop = true;
+                        MessageBox.Show(iteration.ToString());
+                    }
+
+                    else if (sseOld == sseNew)
+                    {
+                        stop = true;
+                        MessageBox.Show(iteration.ToString());
+                    }
+
+                    else
+                    {
+                        centroid1 = c1New;
+                        centroid2 = c2New;
+                        centroid3 = c3New;
+                    }
+                
                 iteration++;
-                switch (iteration)
-                {
-                    case (5):
                         listBoxDisplay.Items.Add(CentroidMover.CalcSSE(listOfIris, centroid1, centroid2, centroid3));
-                        continue;
-                    case (10):
-                        listBoxDisplay.Items.Add(CentroidMover.CalcSSE(listOfIris, centroid1, centroid2, centroid3));
-                        continue;
-                    case (15):
-                        listBoxDisplay.Items.Add(CentroidMover.CalcSSE(listOfIris, centroid1, centroid2, centroid3));
-                        continue;
-                }
+                line += CentroidMover.CalcSSE(listOfIris, centroid1, centroid2, centroid3).ToString();
+                line += "\n";
             }
             dataGridViewDataCluster.Rows.Clear();
             foreach (Iris i in listOfIris)
@@ -466,6 +461,24 @@ namespace Data_Clustering
                 }
             }
             MessageBox.Show(irisC1.Count.ToString(), irisC2.Count.ToString() +" "+ irisC3.Count.ToString());
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Title = "Save List";
+            saveFileDialog.FileName = "Hasil.txt";
+            saveFileDialog.Filter = "Txt files (*.txt)|*.txt|All files (*.*)|*.*";
+            saveFileDialog.CheckPathExists = true;
+            saveFileDialog.DefaultExt = ".txt";
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                
+                FileStream file = new FileStream(saveFileDialog.FileName, FileMode.Create, FileAccess.Write);
+                BinaryFormatter binary = new BinaryFormatter();
+                binary.Serialize(file, line);
+                file.Close();
+            }
         }
     }
 }

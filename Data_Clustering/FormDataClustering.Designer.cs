@@ -41,19 +41,18 @@
             this.widthToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listBoxDisplay = new System.Windows.Forms.ListBox();
-            this.buttonShow = new System.Windows.Forms.Button();
             this.dataGridViewDataCluster = new System.Windows.Forms.DataGridView();
             this.SepalLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SepalWidth = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PetalLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PetalWidth = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Species = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.button1 = new System.Windows.Forms.Button();
-            this.buttonCoba = new System.Windows.Forms.Button();
+            this.buttonRun = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.numericUpDownClusterNumber = new System.Windows.Forms.NumericUpDown();
             this.buttonDetermine = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.buttonAutoRun = new System.Windows.Forms.Button();
+            this.buttonShow = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDataCluster)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownClusterNumber)).BeginInit();
@@ -85,15 +84,16 @@
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveToolStripMenuItem.Text = "Save";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // displayToolStripMenuItem
             // 
@@ -165,17 +165,6 @@
             this.listBoxDisplay.Size = new System.Drawing.Size(583, 147);
             this.listBoxDisplay.TabIndex = 1;
             // 
-            // buttonShow
-            // 
-            this.buttonShow.Location = new System.Drawing.Point(535, 427);
-            this.buttonShow.Margin = new System.Windows.Forms.Padding(2);
-            this.buttonShow.Name = "buttonShow";
-            this.buttonShow.Size = new System.Drawing.Size(56, 19);
-            this.buttonShow.TabIndex = 2;
-            this.buttonShow.Text = "Show";
-            this.buttonShow.UseVisualStyleBackColor = true;
-            this.buttonShow.Click += new System.EventHandler(this.buttonShow_Click);
-            // 
             // dataGridViewDataCluster
             // 
             this.dataGridViewDataCluster.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -228,27 +217,16 @@
             this.Species.Name = "Species";
             this.Species.Width = 125;
             // 
-            // button1
+            // buttonRun
             // 
-            this.button1.Location = new System.Drawing.Point(174, 456);
-            this.button1.Margin = new System.Windows.Forms.Padding(2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(65, 19);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Run";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // buttonCoba
-            // 
-            this.buttonCoba.Location = new System.Drawing.Point(535, 482);
-            this.buttonCoba.Margin = new System.Windows.Forms.Padding(2);
-            this.buttonCoba.Name = "buttonCoba";
-            this.buttonCoba.Size = new System.Drawing.Size(56, 19);
-            this.buttonCoba.TabIndex = 5;
-            this.buttonCoba.Text = "Coba";
-            this.buttonCoba.UseVisualStyleBackColor = true;
-            this.buttonCoba.Click += new System.EventHandler(this.buttonCoba_Click_1);
+            this.buttonRun.Location = new System.Drawing.Point(174, 456);
+            this.buttonRun.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonRun.Name = "buttonRun";
+            this.buttonRun.Size = new System.Drawing.Size(65, 19);
+            this.buttonRun.TabIndex = 4;
+            this.buttonRun.Text = "Run";
+            this.buttonRun.UseVisualStyleBackColor = true;
+            this.buttonRun.Click += new System.EventHandler(this.button1_Click);
             // 
             // label1
             // 
@@ -295,29 +273,39 @@
             this.buttonDetermine.UseVisualStyleBackColor = true;
             this.buttonDetermine.Click += new System.EventHandler(this.buttonDetermine_Click);
             // 
-            // button2
+            // buttonAutoRun
             // 
-            this.button2.AutoSize = true;
-            this.button2.Location = new System.Drawing.Point(174, 479);
-            this.button2.Margin = new System.Windows.Forms.Padding(2);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(65, 23);
-            this.button2.TabIndex = 8;
-            this.button2.Text = "Auto Run";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.buttonAutoRun.AutoSize = true;
+            this.buttonAutoRun.Location = new System.Drawing.Point(174, 479);
+            this.buttonAutoRun.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonAutoRun.Name = "buttonAutoRun";
+            this.buttonAutoRun.Size = new System.Drawing.Size(65, 23);
+            this.buttonAutoRun.TabIndex = 8;
+            this.buttonAutoRun.Text = "Auto Run";
+            this.buttonAutoRun.UseVisualStyleBackColor = true;
+            this.buttonAutoRun.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // buttonShow
+            // 
+            this.buttonShow.Location = new System.Drawing.Point(243, 431);
+            this.buttonShow.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonShow.Name = "buttonShow";
+            this.buttonShow.Size = new System.Drawing.Size(56, 19);
+            this.buttonShow.TabIndex = 2;
+            this.buttonShow.Text = "Show";
+            this.buttonShow.UseVisualStyleBackColor = true;
+            this.buttonShow.Click += new System.EventHandler(this.buttonShow_Click);
             // 
             // FormDataClustering
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(600, 509);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.buttonAutoRun);
             this.Controls.Add(this.buttonDetermine);
             this.Controls.Add(this.numericUpDownClusterNumber);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.buttonCoba);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.buttonRun);
             this.Controls.Add(this.dataGridViewDataCluster);
             this.Controls.Add(this.buttonShow);
             this.Controls.Add(this.listBoxDisplay);
@@ -351,10 +339,8 @@
         private System.Windows.Forms.ToolStripMenuItem widthToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ListBox listBoxDisplay;
-        private System.Windows.Forms.Button buttonShow;
         private System.Windows.Forms.DataGridView dataGridViewDataCluster;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button buttonCoba;
+        private System.Windows.Forms.Button buttonRun;
         private System.Windows.Forms.DataGridViewTextBoxColumn SepalLength;
         private System.Windows.Forms.DataGridViewTextBoxColumn SepalWidth;
         private System.Windows.Forms.DataGridViewTextBoxColumn PetalLength;
@@ -363,7 +349,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.NumericUpDown numericUpDownClusterNumber;
         private System.Windows.Forms.Button buttonDetermine;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button buttonAutoRun;
+        private System.Windows.Forms.Button buttonShow;
     }
 }
 
